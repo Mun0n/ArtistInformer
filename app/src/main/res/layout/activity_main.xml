@@ -5,6 +5,13 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar"/>
+  <include layout="@layout/layout_toolbar"/>
+
+  <fragment
+      android:id="@+id/list_container"
+      android:name="com.munon.artistinformer.ui.main.MainFragment"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
 
 </LinearLayout>

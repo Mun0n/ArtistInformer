@@ -3,6 +3,8 @@ package com.munon.artistinformer.ui.main;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
+import butterknife.InjectView;
 import com.munon.artistinformer.R;
 import com.munon.artistinformer.ui.BaseActivity;
 import java.util.List;
@@ -11,12 +13,18 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements MainView {
 
     private static boolean tabletLayout;
+    private MainPresenter presenter;
+
+    @InjectView(R.id.progress)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         tabletLayout = getResources().getBoolean(R.bool.tablet);
+
+        //presenter = new MainPresenterImpl(this);
     }
 
     @Override
