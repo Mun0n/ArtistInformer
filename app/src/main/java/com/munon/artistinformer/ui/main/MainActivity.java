@@ -1,17 +1,37 @@
-package com.munon.artistinformer;
+package com.munon.artistinformer.ui.main;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.munon.artistinformer.R;
+import com.munon.artistinformer.ui.BaseActivity;
+import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity implements MainView {
+
+    private static boolean tabletLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        tabletLayout = getResources().getBoolean(R.bool.tablet);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected String getActivityTitle() {
+        return getString(R.string.app_name);
+    }
+
+    @Override
+    protected boolean getActivityHomeAsUpEnabled() {
+        return false;
     }
 
     @Override
@@ -34,5 +54,25 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setItems(List<String> items) {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 }
