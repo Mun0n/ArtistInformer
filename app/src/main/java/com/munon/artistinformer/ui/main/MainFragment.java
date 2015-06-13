@@ -2,11 +2,14 @@ package com.munon.artistinformer.ui.main;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -18,6 +21,7 @@ import com.hrules.busline.BusLineListener;
 import com.munon.artistinformer.R;
 import com.munon.artistinformer.model.Artist;
 import com.munon.artistinformer.model.ConverterObject;
+import com.munon.artistinformer.ui.albums.AlbumsActivity;
 import com.munon.artistinformer.ui.main.adapter.MainListAdapter;
 import com.munon.artistinformer.ui.main.adapter.MainListAdapterListener;
 import com.munon.artistinformer.ui.main.events.MainListBusLineEvent;
@@ -60,9 +64,22 @@ public class MainFragment extends Fragment implements MainListAdapterListener, B
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         list.setLayoutManager(layoutManager);
+        list.setItemAnimator(new DefaultItemAnimator());
+        list.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+        });
     }
 
     @Override
@@ -107,7 +124,7 @@ public class MainFragment extends Fragment implements MainListAdapterListener, B
 
     @Override
     public void onClick(int position) {
-
+        listener.onItemSelected(listItems.get(position));
     }
 
 
