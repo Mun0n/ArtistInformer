@@ -1,4 +1,4 @@
-package com.munon.artistinformer.ui.main;
+package com.munon.artistinformer.ui.main.presenter;
 
 public interface MainPresenter {
 

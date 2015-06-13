@@ -3,5 +3,5 @@
 
   <string name="hello_world">Hello world!</string>
   <string name="action_settings">Settings</string>
-  <string name="not_found">Can\' get the information, check your connection</string>
+  <string name="not_found">Can\'t get the information, check your connection</string>
 </resources>

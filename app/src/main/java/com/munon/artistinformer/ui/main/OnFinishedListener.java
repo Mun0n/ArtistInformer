@@ -7,4 +7,6 @@ public interface OnFinishedListener {
 
     void onFinished(List<Artist> artists);
 
+    void OnError();
+
 }

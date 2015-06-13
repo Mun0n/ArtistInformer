@@ -1,30 +1,35 @@
 package com.munon.artistinformer.ui.main;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ProgressBar;
-import butterknife.InjectView;
+
+import com.hrules.busline.BusLine;
 import com.munon.artistinformer.R;
+import com.munon.artistinformer.model.Artist;
 import com.munon.artistinformer.ui.BaseActivity;
+import com.munon.artistinformer.ui.main.events.MainListBusLineEvent;
+import com.munon.artistinformer.ui.main.presenter.MainPresenter;
+import com.munon.artistinformer.ui.main.presenter.MainPresenterImpl;
+
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView, MainFragment.Listener {
 
     private static boolean tabletLayout;
     private MainPresenter presenter;
-
-    @InjectView(R.id.progress)
-    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         tabletLayout = getResources().getBoolean(R.bool.tablet);
+        presenter = new MainPresenterImpl(this);
+    }
 
-        //presenter = new MainPresenterImpl(this);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
     }
 
     @Override
@@ -43,44 +48,30 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void showProgress() {
-
+        BusLine.with(this).send(new MainListBusLineEvent(MainListBusLineEvent.ACTION_SHOW_PROGRESS));
     }
 
     @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void setItems(List<String> items) {
-
+    public void setItems(List<Artist> items) {
+        if (items != null && items.size() > 0) {
+            BusLine.with(this).send(new MainListBusLineEvent(MainListBusLineEvent.ACTION_SHOW_LIST, items));
+        } else {
+            BusLine.with(this).send(new MainListBusLineEvent(MainListBusLineEvent.ACTION_SHOW_TEXT));
+        }
     }
 
     @Override
     public void showMessage(String message) {
+        BusLine.with(this).send(new MainListBusLineEvent(MainListBusLineEvent.ACTION_SHOW_TEXT));
+    }
 
+    @Override
+    public void onItemSelected(Artist position) {
+
+    }
+
+    public boolean isTabletLayout() {
+        return tabletLayout;
     }
 }

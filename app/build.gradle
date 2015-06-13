@@ -27,6 +27,8 @@ dependencies {
   compile 'com.android.support:appcompat-v7:22.2.0'
   compile 'com.android.support:recyclerview-v7:22.0.0'
   compile 'com.jakewharton:butterknife:6.1.0'
-  compile 'com.koushikdutta.ion:ion:2.1.3'
+  compile 'com.koushikdutta.ion:ion:2.+'
   compile 'com.squareup.picasso:picasso:2.5.2'
+  compile 'com.hrules:busline:1.0.0'
+  compile 'org.immutables:gson:2.0.10'
 }
