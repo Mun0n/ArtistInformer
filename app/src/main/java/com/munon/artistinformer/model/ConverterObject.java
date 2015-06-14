@@ -1,5 +1,7 @@
 package com.munon.artistinformer.model;
 
+import android.os.Parcel;
+
 import com.google.gson.annotations.SerializedName;
 
 public class ConverterObject {

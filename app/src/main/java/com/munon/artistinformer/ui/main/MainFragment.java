@@ -2,7 +2,6 @@ package com.munon.artistinformer.ui.main;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,8 +19,6 @@ import com.hrules.busline.BusLineEvent;
 import com.hrules.busline.BusLineListener;
 import com.munon.artistinformer.R;
 import com.munon.artistinformer.model.Artist;
-import com.munon.artistinformer.model.ConverterObject;
-import com.munon.artistinformer.ui.albums.AlbumsActivity;
 import com.munon.artistinformer.ui.main.adapter.MainListAdapter;
 import com.munon.artistinformer.ui.main.adapter.MainListAdapterListener;
 import com.munon.artistinformer.ui.main.events.MainListBusLineEvent;
@@ -98,7 +95,7 @@ public class MainFragment extends Fragment implements MainListAdapterListener, B
             showProgress();
 
         } else if (busLineEvent.getAction().equals(MainListBusLineEvent.ACTION_SHOW_TEXT)) {
-            showText((String) busLineEvent.getObject());
+            showText(getString(R.string.not_found));
 
         }
     }
@@ -128,21 +125,23 @@ public class MainFragment extends Fragment implements MainListAdapterListener, B
     }
 
 
-
     private void showProgress() {
         list.setVisibility(View.GONE);
+        text.setVisibility(View.GONE);
         progress.setVisibility(View.VISIBLE);
     }
 
     private void showList() {
         list.setVisibility(View.VISIBLE);
         progress.setVisibility(View.GONE);
+        text.setVisibility(View.GONE);
 
     }
 
     private void showText(String message) {
         list.setVisibility(View.GONE);
         progress.setVisibility(View.GONE);
+        text.setVisibility(View.VISIBLE);
         text.setText(message);
     }
 }

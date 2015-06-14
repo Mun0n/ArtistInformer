@@ -68,13 +68,16 @@ public class GetArtistInteractorImpl implements GetArtistInteractor {
         ConverterObject resultGenericObject = new ConverterObject();
         Gson gson = new Gson();
         JsonArray arrayResult = result.getAsJsonArray("results");
-        for (JsonElement element : arrayResult) {
+        for (int i = 0; i < arrayResult.size(); i++) {
+            JsonElement element = arrayResult.get(i);
             ConverterObject g = gson.fromJson(element, ConverterObject.class);
             if (g.getWrapperType().equalsIgnoreCase("artist")) {
                 resultGenericObject.setArtist(gson.fromJson(element, Artist.class));
+                Album[] albums = new Album[arrayResult.size() - 1];
+                resultGenericObject.getArtist().setAlbums(albums);
             } else {
                 Album a = gson.fromJson(element, Album.class);
-                resultGenericObject.getArtist().getAlbums().add(a);
+                resultGenericObject.getArtist().getAlbums()[i - 1] = a;
             }
         }
         artists.add(resultGenericObject.getArtist());

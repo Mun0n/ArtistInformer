@@ -8,6 +8,7 @@ import com.munon.artistinformer.R;
 import com.munon.artistinformer.model.Artist;
 import com.munon.artistinformer.ui.BaseActivity;
 import com.munon.artistinformer.ui.albums.AlbumsActivity;
+import com.munon.artistinformer.ui.albums.AlbumsFragment;
 import com.munon.artistinformer.ui.main.events.MainListBusLineEvent;
 import com.munon.artistinformer.ui.main.presenter.MainPresenter;
 import com.munon.artistinformer.ui.main.presenter.MainPresenterImpl;
@@ -71,11 +72,12 @@ public class MainActivity extends BaseActivity implements MainView, MainFragment
     @Override
     public void onItemSelected(Artist artistData) {
         if (tabletLayout) {
-//            Bundle arguments = new Bundle();
-//            arguments.putSerializable(DetailFragment.ARG_RSS_ITEM, rssItem);
-//            DetailFragment fragment = new DetailFragment();
-//            fragment.setArguments(arguments);
-//            getSupportFragmentManager().beginTransaction()
+
+            Bundle arguments = new Bundle();
+            arguments.putSerializable(AlbumsFragment.ALBUM_DATA, artistData);
+            AlbumsFragment fragment = new AlbumsFragment();
+            fragment.setArguments(arguments);
+//            getFragmentManager().beginTransaction()
 //                    .replace(R.id.detail_container, fragment)
 //                    .commit();
 //
@@ -83,9 +85,9 @@ public class MainActivity extends BaseActivity implements MainView, MainFragment
 
 
         } else {
-            Intent i = new Intent(this, AlbumsActivity.class);
-//            i.putExtra(AlbumsActivity.ALBUM_DATA, artistData);
-            startActivity(i);
+            Intent albumsIntent = new Intent(this, AlbumsActivity.class);
+            albumsIntent.putExtra(AlbumsFragment.ALBUM_DATA, artistData);
+            startActivity(albumsIntent);
         }
     }
 

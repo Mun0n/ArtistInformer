@@ -1,18 +1,23 @@
 package com.munon.artistinformer.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 import com.hrules.busline.BusLineEvent;
+import com.hrules.busline.BusLineListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Artist{
+public class Artist extends BusLineEvent {
 
     @SerializedName("artistName")
     private String artistName;
-    private ArrayList<Album> albums;
+    private Album[] albums;
 
     public Artist() {
-        albums = new ArrayList<Album>();
+        super("action");
     }
 
     public String getArtistName() {
@@ -23,11 +28,13 @@ public class Artist{
         this.artistName = artistName;
     }
 
-    public ArrayList<Album> getAlbums() {
+    public Album[] getAlbums() {
         return albums;
     }
 
-    public void setAlbums(ArrayList<Album> albums) {
+    public void setAlbums(Album[] albums) {
         this.albums = albums;
     }
+
+
 }

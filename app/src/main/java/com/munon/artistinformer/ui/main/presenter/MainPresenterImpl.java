@@ -19,6 +19,7 @@ public class MainPresenterImpl implements MainPresenter, OnFinishedListener {
 
     public MainPresenterImpl(Context context) {
         this.mainView = (MainView) context;
+        this.context = context;
         interactor = new GetArtistInteractorImpl(context);
     }
 

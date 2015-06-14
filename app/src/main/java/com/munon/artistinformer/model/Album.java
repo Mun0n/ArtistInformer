@@ -1,13 +1,18 @@
 package com.munon.artistinformer.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.hrules.busline.BusLineEvent;
 
-public class Album {
+public class Album extends BusLineEvent{
 
     @SerializedName("collectionName")
     private String collectionName;
     @SerializedName("artworkUrl100")
     private String artworkUrl100;
+
+    protected Album() {
+        super("album");
+    }
 
     public String getCollectionName() {
         return collectionName;
