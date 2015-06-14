@@ -1,7 +1,9 @@
 package com.munon.artistinformer.ui.main;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.hrules.busline.BusLine;
 import com.munon.artistinformer.R;
@@ -72,17 +74,14 @@ public class MainActivity extends BaseActivity implements MainView, MainFragment
     @Override
     public void onItemSelected(Artist artistData) {
         if (tabletLayout) {
-
+            findViewById(R.id.iconEmpty).setVisibility(View.GONE);
             Bundle arguments = new Bundle();
             arguments.putSerializable(AlbumsFragment.ALBUM_DATA, artistData);
             AlbumsFragment fragment = new AlbumsFragment();
             fragment.setArguments(arguments);
-//            getFragmentManager().beginTransaction()
-//                    .replace(R.id.detail_container, fragment)
-//                    .commit();
-//
-//
-
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.albums_container, fragment)
+                    .commit();
 
         } else {
             Intent albumsIntent = new Intent(this, AlbumsActivity.class);
